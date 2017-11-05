@@ -21,10 +21,13 @@ public class PersonController {
 	public ModelAndView addPerson() {
 		
 		Person person=new Person();
-		person.setName("Jayeeta");
-		personRepo.save(person);
-		
-		return new ModelAndView("savePerson");
+		return new ModelAndView("savePerson", "form", person);
+	}
+	
+	@RequestMapping(value = "/save", method = RequestMethod.POST)
+	public String savePerson(Person person) {
+	    personRepo.save(person);
+	    return ("redirect:/get");
 	}
 	
 	@RequestMapping(value = "/get", method = RequestMethod.GET)
